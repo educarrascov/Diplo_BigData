@@ -1,67 +1,102 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 # Modelamiento Estadístico y Sistemas Recomendadores <img src="img/logo.png" align="right" width = "110px"/>
-Repositorio creado para el Trabajo Final del Curso de Modelamiento Estadístico y Sistemas Recomendadores en el programa de Diplomado en Big Data para la toma de decisiones de la Pontificia Universidad Católica de Chile.
+
+Repositorio creado para el Trabajo Final del Curso de Modelamiento
+Estadístico y Sistemas Recomendadores en el programa de Diplomado en
+Big Data para la toma de decisiones de la Pontificia Universidad
+Católica de Chile.
 
 **Eduardo Carrasco Vidal**
 
 3/31/2020
 
 <!-- badges: start -->
-![R](https://img.shields.io/badge/r-%23276DC3.svg) ![GitHub](https://img.shields.io/badge/github-%23121011.svg)
+
+![R](https://img.shields.io/badge/r-%23276DC3.svg)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg)
 <!-- badges: end -->
 
 **Requisito: Instalar las siguientes librerías**
 
-- _rpart_
-- _Hmisc_
-- _e1071_
+  - *rpart*
+  - *Hmisc*
+  - *e1071*
 
 La versión en desarrollo del documento puede instalarse desde GitHub:
 
-```{r}
+``` r
 # install.packages("devtools")
 # devtools::install_github("educarrascov/TrabajoFinalBigData")
 ```
 
 # Trabajo Final:
+
 (**Resumen General**)
 
-En la primera parte del trabajo, se utilizaron 2 modelos de clasificación (**Naive Bayes / K-NN**), para predecir cifosis en una población dada; para lo cual, se generaron métricas de comparación (Precisión, Especificidad, Sensibilidad) y una matríz de confusión.
+En la primera parte del trabajo, se utilizaron 2 modelos de
+clasificación (**Naive Bayes / K-NN**), para predecir cifosis en una
+población dada; para lo cual, se generaron métricas de comparación
+(Precisión, Especificidad, Sensibilidad) y una matríz de confusión.
 
-En la segunda parte del trabajo; se utilizaron 
+En la segunda parte del trabajo; se utilizaron
 
 ## I. Parte Nº 1:
 
-Considere la base de datos Kyphosis, incluída en la librería Rpart. Esta base de datos contiene datos de 81 niños a los cuales se les realizó una cirugía correctiva en la columna vertical y se les midieron las variables descritas en la siguiente tabla:
+Considere la base de datos Kyphosis, incluída en la librería Rpart. Esta
+base de datos contiene datos de 81 niños a los cuales se les realizó una
+cirugía correctiva en la columna vertical y se les midieron las
+variables descritas en la siguiente tabla:
 
-| variable | descripción|
-| ---------| ---------  |
-| `Age`    | Edad en meses|
-| `Number` | Número de vertebras involucradas|
-| `Start`  | Número de la primera Vértebra|
-|`Kyphosis`| Indica si la persona estudiada presenta (present) o no (absent), la enfermedad denominada cifosis|
+| variable   | descripción                                                                                       |
+| ---------- | ------------------------------------------------------------------------------------------------- |
+| `Age`      | Edad en meses                                                                                     |
+| `Number`   | Número de vertebras involucradas                                                                  |
+| `Start`    | Número de la primera Vértebra                                                                     |
+| `Kyphosis` | Indica si la persona estudiada presenta (present) o no (absent), la enfermedad denominada cifosis |
 
-Se efectuó una simulación con la estadística descriptiva que involucra aspectos de las 4 variables.
+Se efectuó una simulación con la estadística descriptiva que involucra
+aspectos de las 4 variables.
 
-``` {r}
+``` r
 library(rpart) #Cargamos la librerìa rpart
 KyphosisDatos  <-  
 kyphosis #cargamos los datos necesarios para la simulación
 summary(KyphosisDatos) #resumen de la simulación.
+#>     Kyphosis       Age             Number           Start      
+#>  absent :64   Min.   :  1.00   Min.   : 2.000   Min.   : 1.00  
+#>  present:17   1st Qu.: 26.00   1st Qu.: 3.000   1st Qu.: 9.00  
+#>               Median : 87.00   Median : 4.000   Median :13.00  
+#>               Mean   : 83.65   Mean   : 4.049   Mean   :11.49  
+#>               3rd Qu.:130.00   3rd Qu.: 5.000   3rd Qu.:16.00  
+#>               Max.   :206.00   Max.   :10.000   Max.   :18.00
 ```
-``` {r  message=FALSE}
+
+``` r
 table(KyphosisDatos$Age) #se genera una tabla para observar los datos de la variable age
+#> 
+#>   1   2   4   8   9  11  15  17  18  20  22  26  27  31  35  36  37  42  51  52 
+#>   5   3   1   1   2   1   2   1   2   1   1   1   1   1   1   1   1   1   1   1 
+#>  59  61  68  71  72  73  78  80  81  82  87  91  93  96  97 100 102 105 112 113 
+#>   1   2   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+#> 114 118 120 121 125 127 128 130 131 136 139 140 143 148 151 157 158 159 168 175 
+#>   1   2   2   1   1   1   1   2   2   1   2   2   1   1   1   1   2   1   1   1 
+#> 177 178 195 206 
+#>   1   1   1   1
 ```
-``` {r}
+
+``` r
 head(KyphosisDatos) #Con esta función además podemos ver los 6 primero datos de todas las variables
+#>   Kyphosis Age Number Start
+#> 1   absent  71      3     5
+#> 2   absent 158      3    14
+#> 3  present 128      4     5
+#> 4   absent   2      5     1
+#> 5   absent   1      4    15
+#> 6   absent   1      2    16
 ```
+
 ``` r
 names(KyphosisDatos) #con esta también podemos ver, pero sólo las variables.
 ```
@@ -92,11 +127,23 @@ table(KyphosisDatos$Start) #se genera una tabla para observar los datos de la va
     ##  1  2  3  5  6  8  9 10 11 12 13 14 15 16 17 18 
     ##  5  2  3  3  4  2  4  4  3  5 12  5  7 17  4  1
 
-Si se observan los comandos anteriores, podemos ver estadísticas descriptivas de las variables como: el número total de registros corresponde a 11, dentro de los cuales 64 presentan cifosis y 17 no presentan; respecto a los meses, el mínimo de mes en que un niño presenta esta enfermedad es de 1 y el máximo de 206 meses; respecto a la variable número, el número de vértebras involucradas tiene un mínimo de 2 y un máximo de 10; por último, podemos señalar que la primera vértebra operada en algunos casos es la 1 y en otros la 18.
+Si se observan los comandos anteriores, podemos ver estadísticas
+descriptivas de las variables como: el número total de registros
+corresponde a 11, dentro de los cuales 64 presentan cifosis y 17 no
+presentan; respecto a los meses, el mínimo de mes en que un niño
+presenta esta enfermedad es de 1 y el máximo de 206 meses; respecto a la
+variable número, el número de vértebras involucradas tiene un mínimo de
+2 y un máximo de 10; por último, podemos señalar que la primera vértebra
+operada en algunos casos es la 1 y en otros la 18.
 
-La función table(), nos permite visualizar de manera general cada variable de la base de datos pero es más usual observar la función head(), que nos permite observar los 6 primeros valores de cada variable.
+La función table(), nos permite visualizar de manera general cada
+variable de la base de datos pero es más usual observar la función
+head(), que nos permite observar los 6 primeros valores de cada
+variable.
 
-Para observar de mejor manera el comportamiento de las variables en un gráfico de frecuencias, podemos confeccionar un histograma, de acuerdo al siguiente detalle:
+Para observar de mejor manera el comportamiento de las variables en un
+gráfico de frecuencias, podemos confeccionar un histograma, de acuerdo
+al siguiente detalle:
 
 ``` r
 par(mfrow=c(1,3)) #permite generar gráficos en paralelo, 1 fila por 3 columnas
@@ -107,28 +154,39 @@ hist(KyphosisDatos$Start,  main  =  "Histograma  para  Start",  xlab  =  "Start"
 
 ![](Trabajo-Big-Data_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
-Si realizamos una descipción más amplia de las variables utilizando los cuartiles, la mediana y la media aritmética, podemos determinar que la edad promedio de los niños corresponde a 83.65 meses. 
-Sin embargo, la mayor cantidad de niños operados tienen entre uno y dos meses de edad, considerando además que el 25% (1er quartil) de los niños estudiados tienen edades hasta los 26 meses, mientras que el 75% (3er quartil) se concentra con edades hasta los 130 meses. Respecto a la variable que involucra el número de vértebras, el 25% (1er quartil) de los niños ha tenido 3 mientras que el 75% (3er quartil) ha tenido hasta 5, con un número promedio de 4.049, pero siendo 3 vértebras la cantidad más frecuente. 
+Si realizamos una descipción más amplia de las variables utilizando los
+cuartiles, la mediana y la media aritmética, podemos determinar que la
+edad promedio de los niños corresponde a 83.65 meses. Sin embargo, la
+mayor cantidad de niños operados tienen entre uno y dos meses de edad,
+considerando además que el 25% (1er quartil) de los niños estudiados
+tienen edades hasta los 26 meses, mientras que el 75% (3er quartil) se
+concentra con edades hasta los 130 meses. Respecto a la variable que
+involucra el número de vértebras, el 25% (1er quartil) de los niños ha
+tenido 3 mientras que el 75% (3er quartil) ha tenido hasta 5, con un
+número promedio de 4.049, pero siendo 3 vértebras la cantidad más
+frecuente.
 
-Todo lo anterior se puede identificar gráficamente en los histogramas de cada variable.
+Todo lo anterior se puede identificar gráficamente en los histogramas de
+cada variable.
 
-Por último, aplicamos una función que permite identificar datos faltantes de acuerdo al siguiente detalle:
+Por último, aplicamos una función que permite identificar datos
+faltantes de acuerdo al siguiente detalle:
 
 ``` r
 library(Hmisc)#cargamos la librería Hmisc para permitir ejecutar la función describe y verificar valores faltantes
 ```
 
     ## Loading required package: lattice
-
+    
     ## Loading required package: survival
-
+    
     ## Loading required package: Formula
-
+    
     ## Loading required package: ggplot2
-
+    
     ## 
     ## Attaching package: 'Hmisc'
-
+    
     ## The following objects are masked from 'package:base':
     ## 
     ##     format.pval, units
@@ -184,9 +242,14 @@ describe(KyphosisDatos) #ejecutamos la función y observamos que no existen dato
     ## Proportion 0.062 0.086 0.210 0.049 0.012
     ## --------------------------------------------------------------------------------
 
-Como se observa en la función anterior, no hay datos perdidos en ninguna de las variables, por lo cual, podemos finalizar el preprocesamiento de datos.
+Como se observa en la función anterior, no hay datos perdidos en ninguna
+de las variables, por lo cual, podemos finalizar el preprocesamiento de
+datos.
 
-**1) Seleccione de manera aleatoria 2/3 de los datos para crear sus datos de entrenamiento y guarde el tercio restante para crear los datos de validación. Utilice la semilla 1 para el generador de números aleatorios**:
+**1) Seleccione de manera aleatoria 2/3 de los datos para crear sus
+datos de entrenamiento y guarde el tercio restante para crear los datos
+de validación. Utilice la semilla 1 para el generador de números
+aleatorios**:
 
 <!-- end list -->
 
@@ -215,7 +278,9 @@ dim(datos.validacion) #con esto podemos conocer la dimensión de la variable val
 
     ## [1] 28  4
 
-**2) Construya un clasificador de *Bayes Ingenuo* para la variable Kyphosis. Realice las predicciones para su clasificador para los datos de validación:**
+**2) Construya un clasificador de *Bayes Ingenuo* para la variable
+Kyphosis. Realice las predicciones para su clasificador para los datos
+de validación:**
 
 <!-- end list -->
 
@@ -225,7 +290,7 @@ library(e1071) #ahora cargamos la librería sammut and web 2017 que permite efec
 
     ## 
     ## Attaching package: 'e1071'
-
+    
     ## The following object is masked from 'package:Hmisc':
     ## 
     ##     impute
@@ -249,7 +314,11 @@ head(pred.NB) #con esto observamos la probabilidad de obtener un absent o presen
 #la ventaja que nos da por sobre la función pred.NB es que esta muestra sólo los 6 primeros en la lista
 ```
 
-Como lo anterior, no demuestra de manera visual lo correcto o incorrecto que clasifica en modelo seleccionado, sólo entrega una probabilidad de ser clasificado como cifosis ausente o presente, lo correcto es aplicar o ejecutar una función para conocer las métricas, de acuerdo a lo siguiente:
+Como lo anterior, no demuestra de manera visual lo correcto o incorrecto
+que clasifica en modelo seleccionado, sólo entrega una probabilidad de
+ser clasificado como cifosis ausente o presente, lo correcto es aplicar
+o ejecutar una función para conocer las métricas, de acuerdo a lo
+siguiente:
 
 ``` r
 library(rminer) #esta función permite abrir la libreria rminer y poder medir las métricas
@@ -299,48 +368,71 @@ print(pred.NB.Conf  <-  mmetric(datos.validacion[,1],  pred.NB,  "AUC"))#Permite
 ctable <- as.table(matrix(c(21,1,3,3), nrow = 2, byrow = TRUE)) #se deben colocar los valores obtenidos en la matriz
 fourfoldplot(ctable, color = c("#CC6666", "#99CC99"),conf.level = 0, margin = 1, main = "Matriz de Confusión - Naive Bayes")
 ```
-Con esta función podemos incluso obtener una matríz de confusión que permite efectuar el cálculo manual de cada uno de los parámetros anteriormente determinados.
+
+Con esta función podemos incluso obtener una matríz de confusión que
+permite efectuar el cálculo manual de cada uno de los parámetros
+anteriormente determinados.
 
 ![](Trabajo-Big-Data_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
-
-Efectuada la confección de la matriz de confusión y en base a los códigos ejecutados, se puede comparar con las verdaderas clases asociadas a cada entrada para así obtener indicadores cuantitativos respecto al desempeño del modelo.
+Efectuada la confección de la matriz de confusión y en base a los
+códigos ejecutados, se puede comparar con las verdaderas clases
+asociadas a cada entrada para así obtener indicadores cuantitativos
+respecto al desempeño del modelo.
 
 Para lo anterior, se determinaron las siguientes métricas:
 
-| Métrica       | Descripción                          |
-| ------------  | ------------                         |
-| `Precisión`   | (ACC - Classification Accuracy Rate) |
-| `Sensibilidad`| (TPR - True Positive Rate)           |
-|`Especificidad`| (TNR - True Negative Rate)           |
+| Métrica         | Descripción                          |
+| --------------- | ------------------------------------ |
+| `Precisión`     | (ACC - Classification Accuracy Rate) |
+| `Sensibilidad`  | (TPR - True Positive Rate)           |
+| `Especificidad` | (TNR - True Negative Rate)           |
 
+Si se observan los resultados obtenidos, vemos por un lado que la
+**`Precisión`** (**ACC - Clasification Accuraccy Rate**) del modelo es
+de **85.71%**.
 
-Si se observan los resultados obtenidos, vemos por un lado que la **`Precisión`** (**ACC - Clasification Accuraccy Rate**) del modelo es de **85.71%**.
-
-Respecto a la variable **`Sensibilidad`** (**TPR - True Possitive Rate**), esta se puede calcular en forma manual de acuerdo a los resultados obtenidos por la matríz de confusión, que tiene la siguiente estructura:
+Respecto a la variable **`Sensibilidad`** (**TPR - True Possitive
+Rate**), esta se puede calcular en forma manual de acuerdo a los
+resultados obtenidos por la matríz de confusión, que tiene la siguiente
+estructura:
 
 <img src="img/matrixcon.png" align="centre" width = "320px"/>
 
-$$TPR = \frac{TP}{(TP + FP)}$$
+\[TPR = \frac{TP}{(TP + FP)}\]
 
-$$TPR = \frac{21}{(21+1)} = 95,45% $$
+\[TPR = \frac{21}{(21+1)} = 95,45% \]
 
-Respecto a la variable **`Especificidad`** (**TNR - True Negative Rate**), esta se puede calcular en forma manual de acuerdo a los resultados obtenidos por la matríz de confusión, que tiene la siguiente estructura:
+Respecto a la variable **`Especificidad`** (**TNR - True Negative
+Rate**), esta se puede calcular en forma manual de acuerdo a los
+resultados obtenidos por la matríz de confusión, que tiene la siguiente
+estructura:
 
-$$TNR =\frac{TN}{(TN + FN)} $$
+\[TNR =\frac{TN}{(TN + FN)} \]
 
-$$TNR =\frac{3}{(3+3)} = 50,00%$$
+\[TNR =\frac{3}{(3+3)} = 50,00%\]
 
-De acuerdo a los resultados anteriores, podemos concluir que existe una mayor probabilidad de que el clasificador efectúe una clasificación positiva (absent) cuando las variables de entrada tienen características de positivas (absent), llegando a un 95,45% (sensibilidad), lo cual se puede observar en la matríz de confusión. Por otro lado, existe una menor probabilidad de ser clasificado con una clasificación negativa (present) puesto que de los resultados, no hay realmente una distinción entre los verdaderos negativos y los falsos negativos, lo cual nos
-entrega una probabilidad de clasificación negativa (especificidad) de un 50%.
+De acuerdo a los resultados anteriores, podemos concluir que existe una
+mayor probabilidad de que el clasificador efectúe una clasificación
+positiva (absent) cuando las variables de entrada tienen características
+de positivas (absent), llegando a un 95,45% (sensibilidad), lo cual se
+puede observar en la matríz de confusión. Por otro lado, existe una
+menor probabilidad de ser clasificado con una clasificación negativa
+(present) puesto que de los resultados, no hay realmente una distinción
+entre los verdaderos negativos y los falsos negativos, lo cual nos
+entrega una probabilidad de clasificación negativa (especificidad) de un
+50%.
 
-El marcador global o `Precisión` (**ACC - Classification Accuracy Rate**) del clasificador, se puede determinar por la siguiente formula:
+El marcador global o `Precisión` (**ACC - Classification Accuracy
+Rate**) del clasificador, se puede determinar por la siguiente formula:
 
-$$ACC =\frac{(TP + TN)}{(TP + FP + TN + FN)}$$
+\[ACC =\frac{(TP + TN)}{(TP + FP + TN + FN)}\]
 
-$$ACC =\frac{(21 + 3)}{(21 + 1 + 3 + 3)}= 85,71%$$
+\[ACC =\frac{(21 + 3)}{(21 + 1 + 3 + 3)}= 85,71%\]
 
-**3)  Construya un clasificador de *k-vecinos más cercanos (KNN)* para la variable Kyphosis. Realice las predicciones para su clasificador para los datos de validación:**
+**3) Construya un clasificador de *k-vecinos más cercanos (KNN)* para la
+variable Kyphosis. Realice las predicciones para su clasificador para
+los datos de validación:**
 
 <!-- end list -->
 
@@ -386,7 +478,11 @@ summary(fit.kknn)
     ## 27  absent  0.94415632   0.05584368
     ## 28 present  0.37609701   0.62390299
 
-Como lo anterior, no demuestra de manera visual lo correcto o incorrecto que clasifica en modelo seleccionado, sólo entrega una probabilidad de ser clasificado como cifosis ausente (absent) o presente (present), lo correcto es aplicar o ejecutar una función para conocer las métricas, de acuerdo a lo siguiente:
+Como lo anterior, no demuestra de manera visual lo correcto o incorrecto
+que clasifica en modelo seleccionado, sólo entrega una probabilidad de
+ser clasificado como cifosis ausente (absent) o presente (present), lo
+correcto es aplicar o ejecutar una función para conocer las métricas, de
+acuerdo a lo siguiente:
 
 ``` r
 head(fit.kknn)
@@ -622,36 +718,54 @@ fourfoldplot(ctable1, color = c("#CC6666", "#99CC99"),conf.level = 0, margin = 1
 
 ![](Trabajo-Big-Data_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
-Efectuada la confección de la matriz de confusión y en base a los códigos ejecutados, se puede comparar con las verdaderas clases asociadas a cada entrada para así obtener indicadores cuantitativos respecto al desempeño del modelo.
+Efectuada la confección de la matriz de confusión y en base a los
+códigos ejecutados, se puede comparar con las verdaderas clases
+asociadas a cada entrada para así obtener indicadores cuantitativos
+respecto al desempeño del modelo.
 
 Para lo anterior, se determinaron las siguientes métricas:
 
-| Métrica       | Descripción                          |
-| ------------  | ------------                         |
-| `Precisión`   | (ACC - Classification Accuracy Rate) |
-| `Sensibilidad`| (TPR - True Positive Rate)           |
-|`Especificidad`| (TNR - True Negative Rate)           |
+| Métrica         | Descripción                          |
+| --------------- | ------------------------------------ |
+| `Precisión`     | (ACC - Classification Accuracy Rate) |
+| `Sensibilidad`  | (TPR - True Positive Rate)           |
+| `Especificidad` | (TNR - True Negative Rate)           |
 
-Si se observan los resultados obtenidos, vemos por un lado que la precisión del modelo es de **75,00%**.
+Si se observan los resultados obtenidos, vemos por un lado que la
+precisión del modelo es de **75,00%**.
 
-Respecto a la variable `Sensibilidad` (**TPR - True Possitive Rate**), esta se puede calcular en forma manual de acuerdo a los resultados obtenidos por la matríz de confusión, que tiene la siguiente estructura:
+Respecto a la variable `Sensibilidad` (**TPR - True Possitive Rate**),
+esta se puede calcular en forma manual de acuerdo a los resultados
+obtenidos por la matríz de confusión, que tiene la siguiente estructura:
 
-$$TPR = \frac{20}{(20+2)} = 90,90%$$
+\[TPR = \frac{20}{(20+2)} = 90,90%\]
 
-Respecto a la variable `Especificidad` (**TNR - True Negative Rate**), esta se puede calcular en forma manual de acuerdo a los resultados obtenidos por la matríz de confusión, que tiene la siguiente estructura:
+Respecto a la variable `Especificidad` (**TNR - True Negative Rate**),
+esta se puede calcular en forma manual de acuerdo a los resultados
+obtenidos por la matríz de confusión, que tiene la siguiente estructura:
 
-$$TNR =\frac{1}{(1+5)} = 16,66%$$
+\[TNR =\frac{1}{(1+5)} = 16,66%\]
 
-De acuerdo a los resultados anteriores, podemos concluir que existe una mayor probabilidad de que el clasificador efectúe una clasificación positiva (absent) cuando las variables de entrada tienen características de positivas (absent), llegando a un **90,90%** (`Sensibilidad`), lo cual se puede observar en la matríz de confusión. Por otro lado, existe una probabilidad casi nula de ser clasificado con una clasificación negativa (present), afectando gravemente al clasificador, lo cual nos entrega una probabilidad de clasificación negativa (`Especificidad`) de un **16,66%**.
+De acuerdo a los resultados anteriores, podemos concluir que existe una
+mayor probabilidad de que el clasificador efectúe una clasificación
+positiva (absent) cuando las variables de entrada tienen características
+de positivas (absent), llegando a un **90,90%** (`Sensibilidad`), lo
+cual se puede observar en la matríz de confusión. Por otro lado, existe
+una probabilidad casi nula de ser clasificado con una clasificación
+negativa (present), afectando gravemente al clasificador, lo cual nos
+entrega una probabilidad de clasificación negativa (`Especificidad`) de
+un **16,66%**.
 
-El marcador global o `Precisión` (**ACC - Clasification Accuracy Rate**) del clasificador, se puede determinar por la siguiente formula:
+El marcador global o `Precisión` (**ACC - Clasification Accuracy Rate**)
+del clasificador, se puede determinar por la siguiente formula:
 
-$$ACC=\frac{(20 + 1)}{(20+ 2 + 1 + 5)}= 75,00%$$
+\[ACC=\frac{(20 + 1)}{(20+ 2 + 1 + 5)}= 75,00%\]
 
-**4)  Compare los clasificadores respecto de su sensibilidad, especificidad y precisión:**
+**4) Compare los clasificadores respecto de su sensibilidad,
+especificidad y precisión:**
 
-Para efectuar esta comparación, efectuaremos primero una comparación entre ambas matrices de confusión:
-<!-- end list -->
+Para efectuar esta comparación, efectuaremos primero una comparación
+entre ambas matrices de confusión: <!-- end list -->
 
 ``` r
 par(mfrow=c(1,2))#con esto nos permite generar 1 fila con 2 columnas
@@ -661,30 +775,54 @@ fourfoldplot(ctable1, color = c("#CC6666", "#99CC99"),conf.level = 0, margin = 1
 
 ![](Trabajo-Big-Data_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
-Analizada la matriz de confusión en base a los **TP** y **TN** (círculos verdes), podemos observar que mayoritariamente en la matriz Naive Bayes existe una mayor cantidad de valores positivos (**absent**) que fueron efectivamente determinados por el modelo como valores positivos, por lo cual, la variable `Sensibilidad` (**True Positive Rate**), debería ser más grande en Naive Bayes, lo cual se condice con la respuesta obtenida (**95.45 % Naive Bayes / 90.90 % K-NN**). 
+Analizada la matriz de confusión en base a los **TP** y **TN** (círculos
+verdes), podemos observar que mayoritariamente en la matriz Naive Bayes
+existe una mayor cantidad de valores positivos (**absent**) que fueron
+efectivamente determinados por el modelo como valores positivos, por lo
+cual, la variable `Sensibilidad` (**True Positive Rate**), debería ser
+más grande en Naive Bayes, lo cual se condice con la respuesta obtenida
+(**95.45 % Naive Bayes / 90.90 % K-NN**).
 
-Respecto a los valores negativos (**present**) que fueron efectivamente determinados por el modelo como negativo, variable `Especificidad` (**True Negative Rate**), podemos observar que mayoritariamente también en el clasificador Naive Bayes, existe una mayor cantidad, lo cual se observa en los valores reales obtenidos (**50.0 Naive Bayes / 16.66 K-NN**).
+Respecto a los valores negativos (**present**) que fueron efectivamente
+determinados por el modelo como negativo, variable `Especificidad`
+(**True Negative Rate**), podemos observar que mayoritariamente también
+en el clasificador Naive Bayes, existe una mayor cantidad, lo cual se
+observa en los valores reales obtenidos (**50.0 Naive Bayes / 16.66
+K-NN**).
 
-Por último, podemos señalar la medida global de efectividad que involucra la suma de ambos valores de predicción correcta (TP, TN) divididos por la suma de todos los valores (TP, TN, FP, FN); que en clasificador Naive Bayes=24 y en el clasificador Knn=21, estos divididos por el total de valores (Test Set) = 28, se obtiene una `Precisión`
-(**Classification Accuracy Rate**) mayor para el Naive Bayes (**85.71 % Naive bayes / 75.00 % K-NN**).
-
+Por último, podemos señalar la medida global de efectividad que
+involucra la suma de ambos valores de predicción correcta (TP, TN)
+divididos por la suma de todos los valores (TP, TN, FP, FN); que en
+clasificador Naive Bayes=24 y en el clasificador Knn=21, estos divididos
+por el total de valores (Test Set) = 28, se obtiene una `Precisión`
+(**Classification Accuracy Rate**) mayor para el Naive Bayes (**85.71 %
+Naive bayes / 75.00 % K-NN**).
 
 ## II. Parte Nº 2:
 
-Considere los datos "wholesale.csv", que contiene información de 440 clientes de un distribuidor mayorista. La base de datos contiene información sobre el gasto anual de cada cliente en productos en las siguientes categorías: frescos (fresh), lácteos (milk), comestibles (grocery), congelados (frozen), detergentes/papel (detergents_paper) y rotisería (delicatessen).
+Considere los datos “wholesale.csv”, que contiene información de 440
+clientes de un distribuidor mayorista. La base de datos contiene
+información sobre el gasto anual de cada cliente en productos en las
+siguientes categorías: frescos (fresh), lácteos (milk), comestibles
+(grocery), congelados (frozen), detergentes/papel (detergents\_paper) y
+rotisería (delicatessen).
 
-| variable           | descripción                 |
-| ------------       | ----------------------      |
-| `fresh`            | Productos frescos           |
-| `milk`             | Productos lacteos           |
-| `Grocery`          | Productos Comestibles       |
-| `frozen`           | Productos Congelados        |
-| `detergents_paper` | Detergentes y papeles       |
-| `delicatessen`     | Productos de Rotisería      |
+| variable           | descripción            |
+| ------------------ | ---------------------- |
+| `fresh`            | Productos frescos      |
+| `milk`             | Productos lacteos      |
+| `Grocery`          | Productos Comestibles  |
+| `frozen`           | Productos Congelados   |
+| `detergents_paper` | Detergentes y papeles  |
+| `delicatessen`     | Productos de Rotisería |
 
-La estadística descriptiva obtenida a través del ingreso de códigos, se observa en el siguiente cuadro:
+La estadística descriptiva obtenida a través del ingreso de códigos, se
+observa en el siguiente cuadro:
+
 ``` r
 Datos_Wholesale<-  read.table("data/wholesale.csv",header=TRUE,  sep=",")
 summary(Datos_Wholesale)
 ```
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+Note that the `echo = FALSE` parameter was added to the code chunk to
+prevent printing of the R code that generated the plot.
