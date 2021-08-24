@@ -20,6 +20,7 @@ Católica de Chile.
 
 ### Enunciado del trabajo en el siguiente [enlace](https://github.com/educarrascov/DiploBigData/blob/master/6.0.%20Enunciado%20de%20Trabajo%20Grupal%20-%20Curso%20Modelamiento%20EstadiÌ%C2%81stico%20y%20Sistemas%20Recomendadores.pdf)
 
+_____________
 **Requisito: Instalar las siguientes librerías**
 
   - *rpart*
