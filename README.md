@@ -1258,7 +1258,7 @@ gastan hasta 2002 USD, mientras que el 75% gasta hasta 7812 USD. La
 desviación estándar obtenida corresponde a 4370.7, lo que es mayor que
 el promedio, determinando mayor dispersión para este producto.
 
-## REFERENCIAS:
+## III. Referencias:
 
 1.  Horton, Bob (2016) ROC Curves in Two Lines of R Code. Sitio:
     Revolution Analytics. \[en línea\] Recuperado de:
