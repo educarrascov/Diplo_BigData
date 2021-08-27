@@ -464,7 +464,7 @@ library("NbClust")
 nb  <-  NbClust(Datos_Wholesale,  distance  =  "euclidean",  
                 min.nc  =  2,  max.nc  = 10,  method  =  "kmeans")
 ```
-De lo anterio, podemos concluir que de todos los índices presentados, hay 11 que proponen al k=3 como el valor óptimo. 
+De lo anterior, podemos concluir que de todos los índices presentados, hay 7 que proponen al k=3 como el valor óptimo. 
 
 Con la siguiente función se efectúa la determinación del óptima en una tabla de frecuencia que combina la relación de todos los indices. 
 ``` {r} 

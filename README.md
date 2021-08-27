@@ -18,9 +18,6 @@ Católica de Chile.
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg)
 <!-- badges: end -->
 
-### Enunciado del trabajo en el siguiente [enlace](https://github.com/educarrascov/DiploBigData/blob/master/6.0.%20Enunciado%20de%20Trabajo%20Grupal%20-%20Curso%20Modelamiento%20EstadiÌ%C2%81stico%20y%20Sistemas%20Recomendadores.pdf)
-
-_____________
 **Requisito: Instalar las siguientes librerías**
 
   - *rpart*
@@ -1069,8 +1066,8 @@ nb  <-  NbClust(Datos_Wholesale,  distance  =  "euclidean",
     #>  
     #> *******************************************************************
 
-De lo anterio, podemos concluir que de todos los índices presentados,
-hay 11 que proponen al k=3 como el valor óptimo.
+De lo anterior, podemos concluir que de todos los índices presentados,
+hay 7 que proponen al k=3 como el valor óptimo.
 
 Con la siguiente función se efectúa la determinación del óptima en una
 tabla de frecuencia que combina la relación de todos los indices.
@@ -1259,7 +1256,7 @@ gastan hasta 2002 USD, mientras que el 75% gasta hasta 7812 USD. La
 desviación estándar obtenida corresponde a 4370.7, lo que es mayor que
 el promedio, determinando mayor dispersión para este producto.
 
-## III. Referencias:
+## REFERENCIAS:
 
 1.  Horton, Bob (2016) ROC Curves in Two Lines of R Code. Sitio:
     Revolution Analytics. \[en línea\] Recuperado de:
