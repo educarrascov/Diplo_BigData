@@ -4,9 +4,9 @@
 # Modelamiento Estadístico y Sistemas Recomendadores <img src="img/logo.png" align="right" width = "110px"/>
 
 Repositorio creado para el Trabajo Final del Curso de Modelamiento
-Estadístico y Sistemas Recomendadores en el programa de Diplomado en
-Big Data para la toma de decisiones de la Pontificia Universidad
-Católica de Chile.
+Estadístico y Sistemas Recomendadores en el programa de Diplomado en Big
+Data para la toma de decisiones de la Pontificia Universidad Católica de
+Chile.
 
 **Eduardo Carrasco Vidal**
 
@@ -20,14 +20,14 @@ Católica de Chile.
 
 **Requisito: Instalar las siguientes librerías**
 
-  - *rpart*
-  - *Hmisc*
-  - *e1071*
-  - *rminer*
-  - *kknn*
-  - *graphics*
-  - *factoextra*
-  - *NbClust*
+-   *rpart*
+-   *Hmisc*
+-   *e1071*
+-   *rminer*
+-   *kknn*
+-   *graphics*
+-   *factoextra*
+-   *NbClust*
 
 La versión en desarrollo del documento puede instalarse desde GitHub:
 
@@ -57,7 +57,7 @@ realizó una cirugía correctiva en la columna vertical y se les midieron
 las variables descritas en la siguiente tabla:
 
 | variable   | descripción                                                                                       |
-| ---------- | ------------------------------------------------------------------------------------------------- |
+|------------|---------------------------------------------------------------------------------------------------|
 | `Age`      | Edad en meses                                                                                     |
 | `Number`   | Número de vertebras involucradas                                                                  |
 | `Start`    | Número de la primera Vértebra                                                                     |
@@ -249,8 +249,8 @@ aleatorios**:
 
 De acuerdo al enunciado, se generan dos bases de datos:
 
-  - La primera para entrenamiento correspondiente a 2/3.
-  - La segunda para prueba correspondiente a 1/3.
+-   La primera para entrenamiento correspondiente a 2/3.
+-   La segunda para prueba correspondiente a 1/3.
 
 Luego, con la siguiente función observamos la cantidad de valores que se
 encuentran en los nuevos Data Set.
@@ -267,10 +267,8 @@ table(ind) #cantidad de valores por dataSet
 
 Los grupos anteriores se definen de la siguiente forma:
 
-  - datos.trabajo.
-  - datos.validación.
-
-<!-- end list -->
+-   datos.trabajo.
+-   datos.validación.
 
 ``` r
 datos.trabajo  <-  KyphosisDatos[ind==1,] 
@@ -391,7 +389,7 @@ modelo.
 Para lo anterior, se determinaron las siguientes métricas:
 
 | Métrica         | Descripción                              |
-| --------------- | ---------------------------------------- |
+|-----------------|------------------------------------------|
 | `Precisión`     | (**ACC** - Classification Accuracy Rate) |
 | `Sensibilidad`  | (**TPR** - True Positive Rate)           |
 | `Especificidad` | (**TNR** - True Negative Rate)           |
@@ -407,18 +405,18 @@ estructura:
 
 <img src="img/matrixcon.png" align="centre" width = "320px"/>
 
-\[ TPR = \frac{TP}{(TP + FP)} \]
+$$ TPR = \\frac{TP}{(TP + FP)} $$
 
-\[ TPR = \frac{21}{(21+1)} = 95,45% \]
+$$ TPR = \\frac{21}{(21+1)} = 95,45% $$
 
 Respecto a la variable **`Especificidad`** (**TNR - True Negative
 Rate**), esta se puede calcular en forma manual de acuerdo a los
 resultados obtenidos por la matríz de confusión, que tiene la siguiente
 estructura:
 
-\[ TNR =\frac{TN}{(TN + FN)} \]
+$$ TNR =\\frac{TN}{(TN + FN)} $$
 
-\[ TNR =\frac{3}{(3+3)} = 50,00% \]
+$$ TNR =\\frac{3}{(3+3)} = 50,00% $$
 
 De acuerdo a los resultados anteriores, podemos concluir que existe una
 mayor probabilidad de que el clasificador efectúe una clasificación
@@ -434,9 +432,9 @@ entrega una probabilidad de clasificación negativa (especificidad) de un
 El marcador global o `Precisión` (**ACC - Classification Accuracy
 Rate**) del clasificador, se puede determinar por la siguiente formula:
 
-\[ ACC =\frac{(TP + TN)}{(TP + FP + TN + FN)} \]
+$$ ACC =\\frac{(TP + TN)}{(TP + FP + TN + FN)} $$
 
-\[ ACC =\frac{(21 + 3)}{(21 + 1 + 3 + 3)}= 85,71 \]
+$$ ACC =\\frac{(21 + 3)}{(21 + 1 + 3 + 3)}= 85,71 $$
 
 **3) Construya un clasificador de *k-vecinos más cercanos (KNN)* para la
 variable Kyphosis. Realice las predicciones para su clasificador para
@@ -696,7 +694,7 @@ modelo.
 Para lo anterior, se determinaron las siguientes métricas:
 
 | Métrica         | Descripción                          |
-| --------------- | ------------------------------------ |
+|-----------------|--------------------------------------|
 | `Precisión`     | (ACC - Classification Accuracy Rate) |
 | `Sensibilidad`  | (TPR - True Positive Rate)           |
 | `Especificidad` | (TNR - True Negative Rate)           |
@@ -708,13 +706,13 @@ Respecto a la variable `Sensibilidad` (**TPR - True Possitive Rate**),
 esta se puede calcular en forma manual de acuerdo a los resultados
 obtenidos por la matríz de confusión, que tiene la siguiente estructura:
 
-\[ TPR = \frac{20}{(20+2)} = 90,90% \]
+$$ TPR = \\frac{20}{(20+2)} = 90,90% $$
 
 Respecto a la variable `Especificidad` (**TNR - True Negative Rate**),
 esta se puede calcular en forma manual de acuerdo a los resultados
 obtenidos por la matríz de confusión, que tiene la siguiente estructura:
 
-\[ TNR =\frac{1}{(1+5)} = 16,66% \]
+$$ TNR =\\frac{1}{(1+5)} = 16,66% $$
 
 De acuerdo a los resultados anteriores, podemos concluir que existe una
 mayor probabilidad de que el clasificador efectúe una clasificación
@@ -729,7 +727,7 @@ un **16,66%**.
 El marcador global o `Precisión` (**ACC - Clasification Accuracy Rate**)
 del clasificador, se puede determinar por la siguiente formula:
 
-\[ ACC=\frac{(20 + 1)}{(20+ 2 + 1 + 5)}= 75,00% \]
+$$ ACC=\\frac{(20 + 1)}{(20+ 2 + 1 + 5)}= 75,00% $$
 
 **4) Compare los clasificadores respecto de su sensibilidad,
 especificidad y precisión:**
@@ -774,11 +772,11 @@ Considere los datos “wholesale.csv”, que contiene información de 440
 clientes de un distribuidor mayorista. La base de datos contiene
 información sobre el gasto anual de cada cliente en productos en las
 siguientes categorías: frescos (fresh), lácteos (milk), comestibles
-(grocery), congelados (frozen), detergentes/papel (detergents\_paper) y
+(grocery), congelados (frozen), detergentes/papel (detergents_paper) y
 rotisería (delicatessen).
 
 | variable           | descripción            |
-| ------------------ | ---------------------- |
+|--------------------|------------------------|
 | `fresh`            | Productos frescos      |
 | `milk`             | Productos lacteos      |
 | `Grocery`          | Productos Comestibles  |
@@ -847,8 +845,8 @@ hist(Datos_Wholesale$Delicassen,  main  =  "Hist. Delicassen",  xlab  = "Delicas
 ![](README_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
 
 **a) Utilizando K-means, agrupe las observaciones en k grupos, con
-k=1,…,10 y determine la suma de las variaciones dentro de cada grupo
-de k:**
+k=1,…,10 y determine la suma de las variaciones dentro de cada grupo de
+k:**
 
 Para realizar los agrupamientos o segmentaciones (generar clúster), se
 usará la función kmeans () donde 𝑘 es el número de clusters fijado,
@@ -921,7 +919,7 @@ D10$size
 ```
 
 Podemos visualizar gráficamente los clústers usando la función
-fviz\_cluster() de la librería factoextra. Así, por ejemplo, para 𝑘 = 3,
+fviz_cluster() de la librería factoextra. Así, por ejemplo, para 𝑘 = 3,
 𝑘 = 5 y 𝑘 = 9 las gráficas son respectivamente las que se muestran
 abajo. Estas gráficas nos mostrarán los dos componentes principales
 (variables más significativas), por cada agrupación.
