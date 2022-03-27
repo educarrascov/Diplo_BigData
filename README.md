@@ -4,8 +4,8 @@
 # Modelamiento Estadístico y Sistemas Recomendadores <img src="img/logo.png" align="right" width = "110px"/>
 
 Repositorio creado para el Trabajo Final del Curso de Modelamiento
-Estadístico y Sistemas Recomendadores en el programa de Diplomado en Big
-Data para la toma de decisiones de la Pontificia Universidad Católica de
+Estadístico y Sistemas Recomendadores en el programa de **Diplomado en Big
+Data para la toma de decisiones** de la Pontificia Universidad Católica de
 Chile.
 
 **Eduardo Carrasco Vidal**
