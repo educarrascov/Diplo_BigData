@@ -1,11 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Modelamiento Estadístico y Sistemas Recomendadores <img src="img/logo.png" align="right" width = "110px"/>
+# Modelamiento Estadístico y Sistemas Recomendadores <img src="img/logo.png" align="right" width="110px"/>
 
 Repositorio creado para el Trabajo Final del Curso de Modelamiento
-Estadístico y Sistemas Recomendadores en el programa de **Diplomado en Big
-Data para la toma de decisiones** de la Pontificia Universidad Católica de
+Estadístico y Sistemas Recomendadores en el programa de Diplomado en Big
+Data para la toma de decisiones de la Pontificia Universidad Católica de
 Chile.
 
 **Eduardo Carrasco Vidal**
@@ -14,8 +14,9 @@ Chile.
 
 <!-- badges: start -->
 
-![R](https://img.shields.io/badge/r-%23276DC3.svg)
-![GitHub](https://img.shields.io/badge/github-%23121011.svg)
+![R](https://img.shields.io/badge/r-%2523276DC3.svg)
+![GitHub](https://img.shields.io/badge/github-%2523121011.svg)
+
 <!-- badges: end -->
 
 **Requisito: Instalar las siguientes librerías**
@@ -380,11 +381,12 @@ ctable <- as.table(matrix(c(21,1,3,3), nrow = 2, byrow = TRUE))
 fourfoldplot(ctable, color = c("#CC6666", "#99CC99"),conf.level = 0, margin = 1, main = "Matriz de Confusión - Naive Bayes")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- --> Efectuada la
-confección de la matriz de confusión y en base a los códigos ejecutados,
-se puede comparar con las verdaderas clases asociadas a cada entrada
-para así obtener indicadores cuantitativos respecto al desempeño del
-modelo.
+![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+
+Efectuada la confección de la matriz de confusión y en base a los
+códigos ejecutados, se puede comparar con las verdaderas clases
+asociadas a cada entrada para así obtener indicadores cuantitativos
+respecto al desempeño del modelo.
 
 Para lo anterior, se determinaron las siguientes métricas:
 
@@ -403,20 +405,20 @@ Rate**), esta se puede calcular en forma manual de acuerdo a los
 resultados obtenidos por la matríz de confusión, que tiene la siguiente
 estructura:
 
-<img src="img/matrixcon.png" align="centre" width = "320px"/>
+<img src="img/matrixcon.png" align="centre" width="320px"/>
 
-$$ TPR = \\frac{TP}{(TP + FP)} $$
+![ TPR = \\frac{TP}{(TP + FP)} ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%20TPR%20%3D%20%5Cfrac%7BTP%7D%7B%28TP%20%2B%20FP%29%7D%20 " TPR = \frac{TP}{(TP + FP)} ")
 
-$$ TPR = \\frac{21}{(21+1)} = 95,45% $$
+![ TPR = \\frac{21}{(21+1)} = 95,45% ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%20TPR%20%3D%20%5Cfrac%7B21%7D%7B%2821%2B1%29%7D%20%3D%2095%2C45%25%20 " TPR = \frac{21}{(21+1)} = 95,45% ")
 
 Respecto a la variable **`Especificidad`** (**TNR - True Negative
 Rate**), esta se puede calcular en forma manual de acuerdo a los
 resultados obtenidos por la matríz de confusión, que tiene la siguiente
 estructura:
 
-$$ TNR =\\frac{TN}{(TN + FN)} $$
+![ TNR =\\frac{TN}{(TN + FN)} ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%20TNR%20%3D%5Cfrac%7BTN%7D%7B%28TN%20%2B%20FN%29%7D%20 " TNR =\frac{TN}{(TN + FN)} ")
 
-$$ TNR =\\frac{3}{(3+3)} = 50,00% $$
+![ TNR =\\frac{3}{(3+3)} = 50,00% ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%20TNR%20%3D%5Cfrac%7B3%7D%7B%283%2B3%29%7D%20%3D%2050%2C00%25%20 " TNR =\frac{3}{(3+3)} = 50,00% ")
 
 De acuerdo a los resultados anteriores, podemos concluir que existe una
 mayor probabilidad de que el clasificador efectúe una clasificación
@@ -432,9 +434,9 @@ entrega una probabilidad de clasificación negativa (especificidad) de un
 El marcador global o `Precisión` (**ACC - Classification Accuracy
 Rate**) del clasificador, se puede determinar por la siguiente formula:
 
-$$ ACC =\\frac{(TP + TN)}{(TP + FP + TN + FN)} $$
+![ ACC =\\frac{(TP + TN)}{(TP + FP + TN + FN)} ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%20ACC%20%3D%5Cfrac%7B%28TP%20%2B%20TN%29%7D%7B%28TP%20%2B%20FP%20%2B%20TN%20%2B%20FN%29%7D%20 " ACC =\frac{(TP + TN)}{(TP + FP + TN + FN)} ")
 
-$$ ACC =\\frac{(21 + 3)}{(21 + 1 + 3 + 3)}= 85,71 $$
+![ ACC =\\frac{(21 + 3)}{(21 + 1 + 3 + 3)}= 85,71 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%20ACC%20%3D%5Cfrac%7B%2821%20%2B%203%29%7D%7B%2821%20%2B%201%20%2B%203%20%2B%203%29%7D%3D%2085%2C71%20 " ACC =\frac{(21 + 3)}{(21 + 1 + 3 + 3)}= 85,71 ")
 
 **3) Construya un clasificador de *k-vecinos más cercanos (KNN)* para la
 variable Kyphosis. Realice las predicciones para su clasificador para
@@ -685,11 +687,12 @@ anteriormente determinados:
 fourfoldplot(ctable1, color = c("#CC6666", "#99CC99"),conf.level = 0, margin = 1, main = "Matriz de confusión - K-Nearest Neighbors")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-29-1.png)<!-- --> Efectuada la
-confección de la matriz de confusión y en base a los códigos ejecutados,
-se puede comparar con las verdaderas clases asociadas a cada entrada
-para así obtener indicadores cuantitativos respecto al desempeño del
-modelo.
+![](README_files/figure-gfm/unnamed-chunk-29-1.png)<!-- -->
+
+Efectuada la confección de la matriz de confusión y en base a los
+códigos ejecutados, se puede comparar con las verdaderas clases
+asociadas a cada entrada para así obtener indicadores cuantitativos
+respecto al desempeño del modelo.
 
 Para lo anterior, se determinaron las siguientes métricas:
 
@@ -706,13 +709,13 @@ Respecto a la variable `Sensibilidad` (**TPR - True Possitive Rate**),
 esta se puede calcular en forma manual de acuerdo a los resultados
 obtenidos por la matríz de confusión, que tiene la siguiente estructura:
 
-$$ TPR = \\frac{20}{(20+2)} = 90,90% $$
+![ TPR = \\frac{20}{(20+2)} = 90,90% ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%20TPR%20%3D%20%5Cfrac%7B20%7D%7B%2820%2B2%29%7D%20%3D%2090%2C90%25%20 " TPR = \frac{20}{(20+2)} = 90,90% ")
 
 Respecto a la variable `Especificidad` (**TNR - True Negative Rate**),
 esta se puede calcular en forma manual de acuerdo a los resultados
 obtenidos por la matríz de confusión, que tiene la siguiente estructura:
 
-$$ TNR =\\frac{1}{(1+5)} = 16,66% $$
+![ TNR =\\frac{1}{(1+5)} = 16,66% ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%20TNR%20%3D%5Cfrac%7B1%7D%7B%281%2B5%29%7D%20%3D%2016%2C66%25%20 " TNR =\frac{1}{(1+5)} = 16,66% ")
 
 De acuerdo a los resultados anteriores, podemos concluir que existe una
 mayor probabilidad de que el clasificador efectúe una clasificación
@@ -727,7 +730,7 @@ un **16,66%**.
 El marcador global o `Precisión` (**ACC - Clasification Accuracy Rate**)
 del clasificador, se puede determinar por la siguiente formula:
 
-$$ ACC=\\frac{(20 + 1)}{(20+ 2 + 1 + 5)}= 75,00% $$
+![ ACC=\\frac{(20 + 1)}{(20+ 2 + 1 + 5)}= 75,00% ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%20ACC%3D%5Cfrac%7B%2820%20%2B%201%29%7D%7B%2820%2B%202%20%2B%201%20%2B%205%29%7D%3D%2075%2C00%25%20 " ACC=\frac{(20 + 1)}{(20+ 2 + 1 + 5)}= 75,00% ")
 
 **4) Compare los clasificadores respecto de su sensibilidad,
 especificidad y precisión:**
@@ -742,10 +745,11 @@ fourfoldplot(ctable, color = c("#CC6666", "#99CC99"),conf.level = 0, margin = 1,
 fourfoldplot(ctable1, color = c("#CC6666", "#99CC99"),conf.level = 0, margin = 1, main = "K-Nearest Neighbors", )
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-30-1.png)<!-- --> Analizada la
-matriz de confusión en base a los **TP** y **TN** (círculos verdes),
-podemos observar que mayoritariamente en la matriz Naive Bayes existe
-una mayor cantidad de valores positivos (**absent**) que fueron
+![](README_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
+
+Analizada la matriz de confusión en base a los **TP** y **TN** (círculos
+verdes), podemos observar que mayoritariamente en la matriz Naive Bayes
+existe una mayor cantidad de valores positivos (**absent**) que fueron
 efectivamente determinados por el modelo como valores positivos, por lo
 cual, la variable `Sensibilidad` (**True Positive Rate**), debería ser
 más grande en Naive Bayes, lo cual se condice con la respuesta obtenida
